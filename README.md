@@ -1,2 +1,2 @@
 # Ftp-loopback
-Ftp loopback untuk transfer file antar sandbox, 
+Ftp loopback untuk transfer file antar ruang sandbox, 
