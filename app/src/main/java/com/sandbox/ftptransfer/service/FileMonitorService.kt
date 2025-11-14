@@ -7,6 +7,8 @@ import android.util.Log
 import com.sandbox.ftptransfer.utils.PortManager
 import kotlinx.coroutines.*
 import java.io.*
+import java.util.Collections
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicBoolean
 
 class FileMonitorService : Service() {
@@ -15,7 +17,7 @@ class FileMonitorService : Service() {
     private val isRunning = AtomicBoolean(false)
     private var monitorJob: Job? = null
     private val scope = CoroutineScope(Dispatchers.IO + Job())
-    private val processedFiles = mutableSetOf<String>()
+    private val processedFiles = Collections.newSetFromMap(ConcurrentHashMap<String, Boolean>())
     
     override fun onBind(intent: Intent?): IBinder? = null
     
@@ -82,7 +84,7 @@ class FileMonitorService : Service() {
                 
                 if (isFileReady(file)) {
                     processedFiles.add(file.absolutePath)
-                    launch {
+                    scope.launch {
                         sendFileToReceiver(file, directory.name)
                     }
                 }
@@ -95,7 +97,7 @@ class FileMonitorService : Service() {
         }
     }
     
-    private fun isFileReady(file: File): Boolean {
+    private suspend fun isFileReady(file: File): Boolean {
         return try {
             val initialSize = file.length()
             delay(1000)
