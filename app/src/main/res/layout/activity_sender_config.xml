@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sender Configuration"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Configure Folder Monitoring & Port Mapping"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp" />
+
+    <Switch
+        android:id="@+id/switchBackgroundService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable Background Service"
+        android:layout_marginBottom="16dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSender"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnAddFolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add New Folder Monitoring"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/btnSaveSender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Configuration"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/btnBackSender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Main" />
+
+</LinearLayout>
