@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var switchMode: Switch
     private lateinit var btnStart: Button
     private lateinit var btnStop: Button
+    private lateinit var btnReceiverConfig: Button
     private lateinit var tvStatus: TextView
     private lateinit var tvLog: TextView
     
@@ -25,12 +26,14 @@ class MainActivity : AppCompatActivity() {
         
         initViews()
         setupClickListeners()
+        updateModeDisplay()
     }
     
     private fun initViews() {
         switchMode = findViewById(R.id.switchMode)
         btnStart = findViewById(R.id.btnStartService)
         btnStop = findViewById(R.id.btnStopService)
+        btnReceiverConfig = findViewById(R.id.btnReceiverConfig)
         tvStatus = findViewById(R.id.tvStatus)
         tvLog = findViewById(R.id.tvLog)
     }
@@ -48,12 +51,25 @@ class MainActivity : AppCompatActivity() {
         btnStop.setOnClickListener {
             stopServices()
         }
+        
+        btnReceiverConfig.setOnClickListener {
+            if (isReceiverMode) {
+                val intent = Intent(this, ReceiverConfigActivity::class.java)
+                startActivity(intent)
+            } else {
+                // TODO: Add sender port configuration
+                logMessage("Sender port configuration coming soon")
+            }
+        }
     }
     
     private fun updateModeDisplay() {
         val modeText = if (isReceiverMode) "Receiver" else "Sender"
         switchMode.text = "$modeText Mode"
         tvStatus.text = "Status: Stopped - $modeText Mode"
+        
+        // Show/hide receiver config button
+        btnReceiverConfig.text = if (isReceiverMode) "Configure Receiver" else "Configure Sender"
     }
     
     private fun startServices() {

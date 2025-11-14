@@ -26,6 +26,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ReceiverConfigActivity"
+            android:label="Receiver Configuration"
+            android:exported="false" />
+
         <service
             android:name=".service.FileMonitorService"
             android:enabled="true"
