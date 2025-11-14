@@ -67,7 +67,8 @@ class LoopbackServer : Service() {
                     serverSocket.accept()
                 }
                 
-                launch {
+                // FIX: Use scope.launch instead of just launch
+                scope.launch {
                     handleClientConnection(clientSocket, port)
                 }
                 
