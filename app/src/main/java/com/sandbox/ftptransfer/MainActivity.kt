@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var switchMode: Switch
     private lateinit var btnStart: Button
     private lateinit var btnStop: Button
-    private lateinit var btnConfig: Button
+    private lateinit var btnReceiverConfig: Button
     private lateinit var tvStatus: TextView
     private lateinit var tvLog: TextView
     
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         switchMode = findViewById(R.id.switchMode)
         btnStart = findViewById(R.id.btnStartService)
         btnStop = findViewById(R.id.btnStopService)
-        btnConfig = findViewById(R.id.btnConfig)
+        btnReceiverConfig = findViewById(R.id.btnReceiverConfig)
         tvStatus = findViewById(R.id.tvStatus)
         tvLog = findViewById(R.id.tvLog)
     }
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             stopServices()
         }
         
-        btnConfig.setOnClickListener {
+        btnReceiverConfig.setOnClickListener {
             if (isReceiverMode) {
                 val intent = Intent(this, ReceiverConfigActivity::class.java)
                 startActivity(intent)
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         tvStatus.text = "Status: Stopped - $modeText Mode"
         
         // Update config button text
-        btnConfig.text = if (isReceiverMode) "Configure Receiver" else "Configure Sender"
+        btnReceiverConfig.text = if (isReceiverMode) "Configure Receiver" else "Configure Sender"
     }
     
     private fun startServices() {
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             val intent = Intent(this, FileMonitorService::class.java)
             stopService(intent)
-            logMessage("Sender service stopped")
+            logMessage("Sender service stopped"
         }
         tvStatus.text = "Status: Stopped - ${if (isReceiverMode) "Receiver" else "Sender"} Mode"
     }
